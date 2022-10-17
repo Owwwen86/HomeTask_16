@@ -35,7 +35,7 @@ def work_users():
         return app.response_class(
             json.dumps("OK"),
             mimetype="application/json",
-            status=200,
+            status=201,
         )
 
 
@@ -70,15 +70,16 @@ def work_user(bid):
                 user.phone = data.get("phone")
 
                 db.session.commit()
-
+                return app.response_class(
+                    json.dumps("OK"),
+                    mimetype="application/json",
+                    status=200
+                )
             except Exception as e:
                 print(e)
+                db.session.rollback()
 
-            return app.response_class(
-                json.dumps("OK"),
-                mimetype="application/json",
-                status=200
-            )
+            db.session.close()
 
     if request.method == 'DELETE':
         db.session.query(User).filter(User.id == bid).delete()
@@ -87,7 +88,7 @@ def work_user(bid):
         return app.response_class(
             json.dumps("OK"),
             mimetype="application/json",
-            status=200
+            status=204
         )
 
 
@@ -121,7 +122,7 @@ def work_orders():
         return app.response_class(
             json.dumps("OK"),
             mimetype="application/json",
-            status=200,
+            status=201,
         )
 
 
@@ -175,7 +176,7 @@ def work_order(bid):
         return app.response_class(
             json.dumps("OK"),
             mimetype="application/json",
-            status=200
+            status=204
         )
 
 
@@ -207,7 +208,7 @@ def work_offers():
 
         return app.response_class(
             json.dumps("OK", ensure_ascii=False),
-            status=200,
+            status=201,
         )
 
 
@@ -255,7 +256,7 @@ def work_offer(bid):
         return app.response_class(
             json.dumps("OK"),
             mimetype="application/json",
-            status=200
+            status=204
         )
 
 

@@ -76,9 +76,9 @@ def create_app():
         db.init_app(app)
         db.drop_all()
         db.create_all()
-        offer = load_offer("C:/Users/smirn/PycharmProjects/HomeTask_16/data/offers.json")
-        user = load_user("C:/Users/smirn/PycharmProjects/HomeTask_16/data/users.json")
-        order = load_order("C:/Users/smirn/PycharmProjects/HomeTask_16/data/orders.json")
+        offer = load_offer("data/offers.json")
+        user = load_user("data/users.json")
+        order = load_order("data/orders.json")
 
     return app
 
